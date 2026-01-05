@@ -16,3 +16,5 @@
 - exploring a private place youre not supposed to be
 - lightphone
 - noise textures
+
+https://www.youtube.com/watch?v=OmsH3gAFGZEsl

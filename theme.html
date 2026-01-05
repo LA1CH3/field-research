@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Field Research — Bold Keywords</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+        background: #1a1a1a;
+        color: #ccc;
+        padding: 40px;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #888;
+      }
+      h2 {
+        font-size: 13px;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 32px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .palette-bar {
+        display: flex;
+        gap: 2px;
+        margin-bottom: 32px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .palette-color {
+        flex: 1;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: #103029;
+        font-weight: 500;
+      }
+
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px 24px;
+        margin-bottom: 32px;
+        padding: 20px 24px;
+        background: #222;
+        border-radius: 8px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+      }
+      .legend-swatch {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      .legend-label {
+        color: #888;
+      }
+      .legend-hex {
+        color: #555;
+        margin-left: auto;
+        font-size: 11px;
+      }
+
+      .samples {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .sample-section h3 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #555;
+        margin-bottom: 12px;
+      }
+
+      .editor {
+        background: #103029;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .editor-header {
+        background: #0a1f1a;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .editor-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #2a4a42;
+      }
+      .editor-title {
+        margin-left: 12px;
+        font-size: 12px;
+        color: #5a877a;
+      }
+      .editor-body {
+        padding: 20px 24px;
+        font-size: 13px;
+        line-height: 1.8;
+        overflow-x: auto;
+      }
+      .line {
+        white-space: pre;
+      }
+      .ln {
+        color: #2a5548;
+        display: inline-block;
+        width: 28px;
+        text-align: right;
+        margin-right: 20px;
+        user-select: none;
+      }
+
+      /* Updated: Keywords now use foreground color + bold */
+      .fg {
+        color: #88a099;
+      }
+      .kw {
+        color: #88a099;
+        font-weight: 600;
+      } /* foreground + bold */
+      .str {
+        color: #00b3a0;
+      } /* cyan */
+      .fn {
+        color: #94a731;
+      } /* yellow */
+      .var {
+        color: #5ea9b6;
+      } /* blue */
+      .cls {
+        color: #d29123;
+      } /* orange */
+      .num {
+        color: #cd8d91;
+      } /* dusty rose */
+      .op {
+        color: #e78175;
+      } /* red */
+      .cmt {
+        color: #00b573;
+      } /* green */
+
+      .full-width {
+        grid-column: 1 / -1;
+      }
+
+      .note {
+        margin-top: 40px;
+        padding: 20px;
+        background: #222;
+        border-radius: 8px;
+        border-left: 3px solid #00b3a0;
+      }
+      .note h4 {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 12px;
+      }
+      .note p {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Field Research</h1>
+      <h2>Bold Keywords + Dusty Rose Numbers</h2>
+
+      <div class="palette-bar">
+        <div class="palette-color" style="background: #94a731">yellow</div>
+        <div class="palette-color" style="background: #d29123">orange</div>
+        <div class="palette-color" style="background: #cd8d91">dusty rose</div>
+        <div class="palette-color" style="background: #e78175">red</div>
+        <div
+          class="palette-color"
+          style="background: #88a099; color: #103029; font-weight: 600"
+        >
+          fg bold
+        </div>
+        <div class="palette-color" style="background: #5ea9b6">blue</div>
+        <div class="palette-color" style="background: #00b3a0">cyan</div>
+        <div class="palette-color" style="background: #00b573">green</div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #88a099"></div>
+          <span class="legend-label"><strong>Keywords (bold)</strong></span>
+          <span class="legend-hex">#88a099</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #94a731"></div>
+          <span class="legend-label">Functions</span>
+          <span class="legend-hex">#94a731</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #00b3a0"></div>
+          <span class="legend-label">Strings</span>
+          <span class="legend-hex">#00b3a0</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #cd8d91"></div>
+          <span class="legend-label">Numbers</span>
+          <span class="legend-hex">#cd8d91</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #d29123"></div>
+          <span class="legend-label">Classes / Constants</span>
+          <span class="legend-hex">#d29123</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #5ea9b6"></div>
+          <span class="legend-label">Variables</span>
+          <span class="legend-hex">#5ea9b6</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #e78175"></div>
+          <span class="legend-label">Operators</span>
+          <span class="legend-hex">#e78175</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: #00b573"></div>
+          <span class="legend-label">Comments</span>
+          <span class="legend-hex">#00b573</span>
+        </div>
+      </div>
+
+      <div class="samples">
+        <div class="sample-section">
+          <h3>TypeScript</h3>
+          <div class="editor">
+            <div class="editor-header">
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <span class="editor-title">sensor-array.ts</span>
+            </div>
+            <div class="editor-body">
+              <div class="line">
+                <span class="ln">1</span
+                ><span class="cmt">// Field station sensor array manager</span>
+              </div>
+              <div class="line">
+                <span class="ln">2</span><span class="kw">import</span>
+                <span class="fg">{</span> <span class="cls">EventEmitter</span>
+                <span class="fg">}</span> <span class="kw">from</span>
+                <span class="str">'events'</span><span class="fg">;</span>
+              </div>
+              <div class="line"><span class="ln">3</span></div>
+              <div class="line">
+                <span class="ln">4</span><span class="kw">interface</span>
+                <span class="cls">Reading</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">5</span> <span class="var">timestamp</span
+                ><span class="op">:</span> <span class="cls">Date</span
+                ><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">6</span> <span class="var">value</span
+                ><span class="op">:</span> <span class="cls">number</span
+                ><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">7</span> <span class="var">unit</span
+                ><span class="op">:</span> <span class="cls">string</span
+                ><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">8</span><span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">9</span></div>
+              <div class="line">
+                <span class="ln">10</span><span class="kw">const</span>
+                <span class="cls">MAX_READINGS</span> <span class="op">=</span>
+                <span class="num">1024</span><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">11</span><span class="kw">const</span>
+                <span class="cls">POLL_INTERVAL</span>
+                <span class="op">=</span> <span class="num">250</span
+                ><span class="fg">;</span>
+              </div>
+              <div class="line"><span class="ln">12</span></div>
+              <div class="line">
+                <span class="ln">13</span><span class="kw">export class</span>
+                <span class="cls">SensorArray</span>
+                <span class="kw">extends</span>
+                <span class="cls">EventEmitter</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">14</span> <span class="kw">private</span>
+                <span class="var">readings</span><span class="op">:</span>
+                <span class="cls">Reading</span><span class="fg">[]</span>
+                <span class="op">=</span> <span class="fg">[];</span>
+              </div>
+              <div class="line">
+                <span class="ln">15</span> <span class="kw">private</span>
+                <span class="var">isActive</span> <span class="op">=</span>
+                <span class="cls">false</span><span class="fg">;</span>
+              </div>
+              <div class="line"><span class="ln">16</span></div>
+              <div class="line">
+                <span class="ln">17</span> <span class="fn">constructor</span
+                ><span class="fg">(</span><span class="kw">private</span>
+                <span class="var">sensorId</span><span class="op">:</span>
+                <span class="cls">string</span><span class="fg">) {</span>
+              </div>
+              <div class="line">
+                <span class="ln">18</span> <span class="kw">super</span
+                ><span class="fg">();</span>
+              </div>
+              <div class="line">
+                <span class="ln">19</span> <span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">20</span></div>
+              <div class="line">
+                <span class="ln">21</span>
+                <span class="cmt">// Begin polling hardware</span>
+              </div>
+              <div class="line">
+                <span class="ln">22</span> <span class="fn">start</span
+                ><span class="fg">():</span> <span class="cls">void</span>
+                <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">23</span> <span class="kw">this</span
+                ><span class="fg">.</span><span class="var">isActive</span>
+                <span class="op">=</span> <span class="cls">true</span
+                ><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">24</span> <span class="kw">this</span
+                ><span class="fg">.</span><span class="fn">poll</span
+                ><span class="fg">();</span>
+              </div>
+              <div class="line">
+                <span class="ln">25</span> <span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">26</span></div>
+              <div class="line">
+                <span class="ln">27</span>
+                <span class="kw">private async</span>
+                <span class="fn">poll</span><span class="fg">():</span>
+                <span class="cls">Promise</span><span class="op">&lt;</span
+                ><span class="cls">void</span><span class="op">&gt;</span>
+                <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">28</span> <span class="kw">while</span>
+                <span class="fg">(</span><span class="kw">this</span
+                ><span class="fg">.</span><span class="var">isActive</span
+                ><span class="fg">) {</span>
+              </div>
+              <div class="line">
+                <span class="ln">29</span> <span class="kw">const</span>
+                <span class="var">reading</span> <span class="op">=</span>
+                <span class="kw">await this</span><span class="fg">.</span
+                ><span class="fn">capture</span><span class="fg">();</span>
+              </div>
+              <div class="line"><span class="ln">30</span></div>
+              <div class="line">
+                <span class="ln">31</span> <span class="kw">if</span>
+                <span class="fg">(</span><span class="var">reading</span
+                ><span class="fg">.</span><span class="var">value</span>
+                <span class="op">&gt;</span> <span class="num">42.5</span
+                ><span class="fg">) {</span>
+              </div>
+              <div class="line">
+                <span class="ln">32</span> <span class="kw">this</span
+                ><span class="fg">.</span><span class="fn">emit</span
+                ><span class="fg">(</span><span class="str">'warning'</span
+                ><span class="fg">,</span> <span class="var">reading</span
+                ><span class="fg">);</span>
+              </div>
+              <div class="line">
+                <span class="ln">33</span> <span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">34</span></div>
+              <div class="line">
+                <span class="ln">35</span> <span class="kw">this</span
+                ><span class="fg">.</span><span class="var">readings</span
+                ><span class="fg">.</span><span class="fn">push</span
+                ><span class="fg">(</span><span class="var">reading</span
+                ><span class="fg">);</span>
+              </div>
+              <div class="line">
+                <span class="ln">36</span> <span class="kw">await</span>
+                <span class="fn">sleep</span><span class="fg">(</span
+                ><span class="cls">POLL_INTERVAL</span
+                ><span class="fg">);</span>
+              </div>
+              <div class="line">
+                <span class="ln">37</span> <span class="fg">}</span>
+              </div>
+              <div class="line">
+                <span class="ln">38</span> <span class="fg">}</span>
+              </div>
+              <div class="line">
+                <span class="ln">39</span><span class="fg">}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sample-section">
+          <h3>Python</h3>
+          <div class="editor">
+            <div class="editor-header">
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <span class="editor-title">telemetry.py</span>
+            </div>
+            <div class="editor-body">
+              <div class="line">
+                <span class="ln">1</span
+                ><span class="cmt"># Telemetry processing module</span>
+              </div>
+              <div class="line">
+                <span class="ln">2</span><span class="kw">from</span>
+                <span class="var">dataclasses</span>
+                <span class="kw">import</span>
+                <span class="var">dataclass</span>
+              </div>
+              <div class="line">
+                <span class="ln">3</span><span class="kw">from</span>
+                <span class="var">typing</span> <span class="kw">import</span>
+                <span class="cls">Optional</span><span class="fg">,</span>
+                <span class="cls">List</span>
+              </div>
+              <div class="line">
+                <span class="ln">4</span><span class="kw">import</span>
+                <span class="var">numpy</span> <span class="kw">as</span>
+                <span class="var">np</span>
+              </div>
+              <div class="line"><span class="ln">5</span></div>
+              <div class="line">
+                <span class="ln">6</span
+                ><span class="cls">EARTH_RADIUS_KM</span>
+                <span class="op">=</span> <span class="num">6371.0</span>
+              </div>
+              <div class="line">
+                <span class="ln">7</span><span class="cls">MAX_ALTITUDE</span>
+                <span class="op">=</span> <span class="num">12500</span>
+              </div>
+              <div class="line"><span class="ln">8</span></div>
+              <div class="line">
+                <span class="ln">9</span><span class="op">@</span
+                ><span class="fn">dataclass</span>
+              </div>
+              <div class="line">
+                <span class="ln">10</span><span class="kw">class</span>
+                <span class="cls">Coordinates</span><span class="fg">:</span>
+              </div>
+              <div class="line">
+                <span class="ln">11</span> <span class="var">lat</span
+                ><span class="fg">:</span> <span class="cls">float</span>
+              </div>
+              <div class="line">
+                <span class="ln">12</span> <span class="var">lon</span
+                ><span class="fg">:</span> <span class="cls">float</span>
+              </div>
+              <div class="line">
+                <span class="ln">13</span> <span class="var">alt</span
+                ><span class="fg">:</span> <span class="cls">Optional</span
+                ><span class="fg">[</span><span class="cls">float</span
+                ><span class="fg">]</span> <span class="op">=</span>
+                <span class="cls">None</span>
+              </div>
+              <div class="line"><span class="ln">14</span></div>
+              <div class="line"><span class="ln">15</span></div>
+              <div class="line">
+                <span class="ln">16</span><span class="kw">class</span>
+                <span class="cls">TelemetryProcessor</span
+                ><span class="fg">:</span>
+              </div>
+              <div class="line">
+                <span class="ln">17</span>
+                <span class="str">"""Process incoming telemetry."""</span>
+              </div>
+              <div class="line"><span class="ln">18</span></div>
+              <div class="line">
+                <span class="ln">19</span> <span class="kw">def</span>
+                <span class="fn">__init__</span><span class="fg">(</span
+                ><span class="var">self</span><span class="fg">,</span>
+                <span class="var">station_id</span><span class="fg">:</span>
+                <span class="cls">str</span><span class="fg">):</span>
+              </div>
+              <div class="line">
+                <span class="ln">20</span> <span class="var">self</span
+                ><span class="fg">.</span><span class="var">station_id</span>
+                <span class="op">=</span> <span class="var">station_id</span>
+              </div>
+              <div class="line">
+                <span class="ln">21</span> <span class="var">self</span
+                ><span class="fg">.</span><span class="var">buffer</span
+                ><span class="fg">:</span> <span class="cls">List</span
+                ><span class="fg">[</span><span class="cls">Coordinates</span
+                ><span class="fg">]</span> <span class="op">=</span>
+                <span class="fg">[]</span>
+              </div>
+              <div class="line"><span class="ln">22</span></div>
+              <div class="line">
+                <span class="ln">23</span> <span class="kw">def</span>
+                <span class="fn">haversine</span><span class="fg">(</span
+                ><span class="var">self</span><span class="fg">,</span>
+                <span class="var">a</span><span class="fg">:</span>
+                <span class="cls">Coordinates</span><span class="fg">,</span>
+                <span class="var">b</span><span class="fg">:</span>
+                <span class="cls">Coordinates</span><span class="fg">)</span>
+                <span class="op">-&gt;</span> <span class="cls">float</span
+                ><span class="fg">:</span>
+              </div>
+              <div class="line">
+                <span class="ln">24</span>
+                <span class="cmt"># Great-circle distance</span>
+              </div>
+              <div class="line">
+                <span class="ln">25</span> <span class="var">d_lat</span>
+                <span class="op">=</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">radians</span
+                ><span class="fg">(</span><span class="var">b</span
+                ><span class="fg">.</span><span class="var">lat</span>
+                <span class="op">-</span> <span class="var">a</span
+                ><span class="fg">.</span><span class="var">lat</span
+                ><span class="fg">)</span>
+              </div>
+              <div class="line">
+                <span class="ln">26</span> <span class="var">d_lon</span>
+                <span class="op">=</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">radians</span
+                ><span class="fg">(</span><span class="var">b</span
+                ><span class="fg">.</span><span class="var">lon</span>
+                <span class="op">-</span> <span class="var">a</span
+                ><span class="fg">.</span><span class="var">lon</span
+                ><span class="fg">)</span>
+              </div>
+              <div class="line"><span class="ln">27</span></div>
+              <div class="line">
+                <span class="ln">28</span> <span class="var">h</span>
+                <span class="op">=</span> <span class="fg">(</span>
+              </div>
+              <div class="line">
+                <span class="ln">29</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">sin</span
+                ><span class="fg">(</span><span class="var">d_lat</span>
+                <span class="op">/</span> <span class="num">2</span
+                ><span class="fg">)</span> <span class="op">**</span>
+                <span class="num">2</span> <span class="op">+</span>
+              </div>
+              <div class="line">
+                <span class="ln">30</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">cos</span
+                ><span class="fg">(</span><span class="var">np</span
+                ><span class="fg">.</span><span class="fn">radians</span
+                ><span class="fg">(</span><span class="var">a</span
+                ><span class="fg">.</span><span class="var">lat</span
+                ><span class="fg">))</span> <span class="op">*</span>
+              </div>
+              <div class="line">
+                <span class="ln">31</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">cos</span
+                ><span class="fg">(</span><span class="var">np</span
+                ><span class="fg">.</span><span class="fn">radians</span
+                ><span class="fg">(</span><span class="var">b</span
+                ><span class="fg">.</span><span class="var">lat</span
+                ><span class="fg">))</span> <span class="op">*</span>
+              </div>
+              <div class="line">
+                <span class="ln">32</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">sin</span
+                ><span class="fg">(</span><span class="var">d_lon</span>
+                <span class="op">/</span> <span class="num">2</span
+                ><span class="fg">)</span> <span class="op">**</span>
+                <span class="num">2</span>
+              </div>
+              <div class="line">
+                <span class="ln">33</span> <span class="fg">)</span>
+              </div>
+              <div class="line"><span class="ln">34</span></div>
+              <div class="line">
+                <span class="ln">35</span> <span class="kw">return</span>
+                <span class="num">2</span> <span class="op">*</span>
+                <span class="cls">EARTH_RADIUS_KM</span>
+                <span class="op">*</span> <span class="var">np</span
+                ><span class="fg">.</span><span class="fn">arcsin</span
+                ><span class="fg">(</span><span class="var">np</span
+                ><span class="fg">.</span><span class="fn">sqrt</span
+                ><span class="fg">(</span><span class="var">h</span
+                ><span class="fg">))</span>
+              </div>
+              <div class="line"><span class="ln">36</span></div>
+              <div class="line">
+                <span class="ln">37</span> <span class="kw">def</span>
+                <span class="fn">validate</span><span class="fg">(</span
+                ><span class="var">self</span><span class="fg">,</span>
+                <span class="var">coord</span><span class="fg">:</span>
+                <span class="cls">Coordinates</span><span class="fg">)</span>
+                <span class="op">-&gt;</span> <span class="cls">bool</span
+                ><span class="fg">:</span>
+              </div>
+              <div class="line">
+                <span class="ln">38</span> <span class="kw">if</span>
+                <span class="var">coord</span><span class="fg">.</span
+                ><span class="var">alt</span> <span class="kw">and</span>
+                <span class="var">coord</span><span class="fg">.</span
+                ><span class="var">alt</span> <span class="op">&gt;</span>
+                <span class="cls">MAX_ALTITUDE</span><span class="fg">:</span>
+              </div>
+              <div class="line">
+                <span class="ln">39</span> <span class="kw">return</span>
+                <span class="cls">False</span>
+              </div>
+              <div class="line">
+                <span class="ln">40</span> <span class="kw">return</span>
+                <span class="op">-</span><span class="num">90</span>
+                <span class="op">&lt;=</span> <span class="var">coord</span
+                ><span class="fg">.</span><span class="var">lat</span>
+                <span class="op">&lt;=</span> <span class="num">90</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sample-section full-width">
+          <h3>Rust</h3>
+          <div class="editor">
+            <div class="editor-header">
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <span class="editor-title">radio.rs</span>
+            </div>
+            <div class="editor-body">
+              <div class="line">
+                <span class="ln">1</span
+                ><span class="cmt"
+                  >//! Radio frequency scanner for field operations</span
+                >
+              </div>
+              <div class="line"><span class="ln">2</span></div>
+              <div class="line">
+                <span class="ln">3</span><span class="kw">use</span>
+                <span class="var">std</span><span class="op">::</span
+                ><span class="var">sync</span><span class="op">::</span
+                ><span class="cls">Arc</span><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">4</span><span class="kw">use</span>
+                <span class="var">tokio</span><span class="op">::</span
+                ><span class="var">sync</span><span class="op">::</span
+                ><span class="cls">Mutex</span><span class="fg">;</span>
+              </div>
+              <div class="line"><span class="ln">5</span></div>
+              <div class="line">
+                <span class="ln">6</span><span class="kw">const</span>
+                <span class="cls">BASE_FREQ_MHZ</span><span class="fg">:</span>
+                <span class="cls">f64</span> <span class="op">=</span>
+                <span class="num">144.390</span><span class="fg">;</span>
+              </div>
+              <div class="line">
+                <span class="ln">7</span><span class="kw">const</span>
+                <span class="cls">BANDWIDTH_KHZ</span><span class="fg">:</span>
+                <span class="cls">u32</span> <span class="op">=</span>
+                <span class="num">12</span><span class="fg">;</span>
+              </div>
+              <div class="line"><span class="ln">8</span></div>
+              <div class="line">
+                <span class="ln">9</span><span class="op">#[</span
+                ><span class="fn">derive</span><span class="fg">(</span
+                ><span class="cls">Debug</span><span class="fg">,</span>
+                <span class="cls">Clone</span><span class="fg">)</span
+                ><span class="op">]</span>
+              </div>
+              <div class="line">
+                <span class="ln">10</span><span class="kw">pub struct</span>
+                <span class="cls">Signal</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">11</span> <span class="var">frequency</span
+                ><span class="fg">:</span> <span class="cls">f64</span
+                ><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">12</span> <span class="var">strength</span
+                ><span class="fg">:</span> <span class="cls">i32</span
+                ><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">13</span> <span class="var">timestamp</span
+                ><span class="fg">:</span> <span class="cls">u64</span
+                ><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">14</span><span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">15</span></div>
+              <div class="line">
+                <span class="ln">16</span><span class="kw">impl</span>
+                <span class="cls">Signal</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">17</span> <span class="kw">pub fn</span>
+                <span class="fn">new</span><span class="fg">(</span
+                ><span class="var">frequency</span><span class="fg">:</span>
+                <span class="cls">f64</span><span class="fg">,</span>
+                <span class="var">strength</span><span class="fg">:</span>
+                <span class="cls">i32</span><span class="fg">)</span>
+                <span class="op">-&gt;</span> <span class="cls">Self</span>
+                <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">18</span> <span class="cls">Self</span>
+                <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">19</span> <span class="var">frequency</span
+                ><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">20</span> <span class="var">strength</span
+                ><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">21</span> <span class="var">timestamp</span
+                ><span class="fg">:</span> <span class="fn">now_millis</span
+                ><span class="fg">(),</span>
+              </div>
+              <div class="line">
+                <span class="ln">22</span> <span class="fg">}</span>
+              </div>
+              <div class="line">
+                <span class="ln">23</span> <span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">24</span></div>
+              <div class="line">
+                <span class="ln">25</span>
+                <span class="cmt"
+                  >/// Check if signal is within operational band</span
+                >
+              </div>
+              <div class="line">
+                <span class="ln">26</span> <span class="kw">pub fn</span>
+                <span class="fn">in_band</span><span class="fg">(</span
+                ><span class="op">&</span><span class="var">self</span
+                ><span class="fg">)</span> <span class="op">-&gt;</span>
+                <span class="cls">bool</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">27</span> <span class="kw">let</span>
+                <span class="var">delta</span> <span class="op">=</span>
+                <span class="fg">(</span><span class="var">self</span
+                ><span class="fg">.</span><span class="var">frequency</span>
+                <span class="op">-</span> <span class="cls">BASE_FREQ_MHZ</span
+                ><span class="fg">)</span><span class="fg">.</span
+                ><span class="fn">abs</span><span class="fg">();</span>
+              </div>
+              <div class="line">
+                <span class="ln">28</span> <span class="var">delta</span>
+                <span class="op">&lt;</span> <span class="fg">(</span
+                ><span class="cls">BANDWIDTH_KHZ</span>
+                <span class="kw">as</span> <span class="cls">f64</span>
+                <span class="op">/</span> <span class="num">1000.0</span
+                ><span class="fg">)</span>
+              </div>
+              <div class="line">
+                <span class="ln">29</span> <span class="fg">}</span>
+              </div>
+              <div class="line"><span class="ln">30</span></div>
+              <div class="line">
+                <span class="ln">31</span>
+                <span class="cmt"
+                  >/// Calculate signal quality based on strength
+                  thresholds</span
+                >
+              </div>
+              <div class="line">
+                <span class="ln">32</span> <span class="kw">pub fn</span>
+                <span class="fn">quality</span><span class="fg">(</span
+                ><span class="op">&</span><span class="var">self</span
+                ><span class="fg">)</span> <span class="op">-&gt;</span>
+                <span class="cls">SignalQuality</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">33</span> <span class="kw">match</span>
+                <span class="var">self</span><span class="fg">.</span
+                ><span class="var">strength</span> <span class="fg">{</span>
+              </div>
+              <div class="line">
+                <span class="ln">34</span> <span class="var">s</span>
+                <span class="kw">if</span> <span class="var">s</span>
+                <span class="op">&gt;=</span> <span class="num">80</span>
+                <span class="op">=&gt;</span>
+                <span class="cls">SignalQuality</span><span class="op">::</span
+                ><span class="cls">Excellent</span><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">35</span> <span class="var">s</span>
+                <span class="kw">if</span> <span class="var">s</span>
+                <span class="op">&gt;=</span> <span class="num">50</span>
+                <span class="op">=&gt;</span>
+                <span class="cls">SignalQuality</span><span class="op">::</span
+                ><span class="cls">Good</span><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">36</span> <span class="var">s</span>
+                <span class="kw">if</span> <span class="var">s</span>
+                <span class="op">&gt;=</span> <span class="num">20</span>
+                <span class="op">=&gt;</span>
+                <span class="cls">SignalQuality</span><span class="op">::</span
+                ><span class="cls">Weak</span><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">37</span> <span class="op">_</span>
+                <span class="op">=&gt;</span>
+                <span class="cls">SignalQuality</span><span class="op">::</span
+                ><span class="cls">None</span><span class="fg">,</span>
+              </div>
+              <div class="line">
+                <span class="ln">38</span> <span class="fg">}</span>
+              </div>
+              <div class="line">
+                <span class="ln">39</span> <span class="fg">}</span>
+              </div>
+              <div class="line">
+                <span class="ln">40</span><span class="fg">}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <h4>Why this works</h4>
+        <p>
+          Using weight instead of hue for keywords is very much in the Solarized
+          spirit — it reduces the total number of "chromatic voices" competing
+          for attention. Now you have just 7 accent hues instead of 8, and the
+          palette feels more grounded in the equipment aesthetic. The bold
+          weight gives keywords enough presence to guide your eye through
+          control flow without introducing a color that doesn't belong.
+        </p>
+        <p style="margin-top: 12px">
+          The dusty rose for numbers still provides warmth to balance the cool
+          teal/cyan/green tones, but it's the only pink in the palette — which
+          makes it feel intentional rather than random.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
