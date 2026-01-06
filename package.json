@@ -1,20 +1,32 @@
 {
-  "name": "test-theme",
-  "displayName": "test-theme",
-  "description": "",
-  "version": "0.0.1",
+  "name": "field-research",
+  "displayName": "Field Research",
+  "description": "A dark theme with high-precision mathematics and analog decay aesthetic",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.107.0"
   },
   "categories": [
     "Themes"
   ],
+  "keywords": [
+    "theme",
+    "dark theme",
+    "color theme",
+    "green",
+    "minimal"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "la1ch3",
+    "email": "jay@jaylaiche.com"
+  },
   "contributes": {
     "themes": [
       {
-        "label": "test theme",
+        "label": "Field Research",
         "uiTheme": "vs-dark",
-        "path": "./themes/test theme-color-theme.json"
+        "path": "./themes/field-research-color-theme.json"
       }
     ]
   }

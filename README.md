@@ -4,9 +4,9 @@ A dark VSCode theme.
 
 Inspirations:
 
-- YouTube videos of remote forest outpost ambience
-- Casette futurism
-- Solarized
+- [YouTube videos of remote forest outpost ambience](https://www.youtube.com/watch?v=GGw3axV7IGs&list=RDGGw3axV7IGs&start_radio=1)
+- [Casette futurism](https://www.reddit.com/r/cassettefuturism/)
+- [Solarized](https://ethanschoonover.com/solarized/)
 
 Built on Solarized's principle of perceptual uniformity: all accent colors are normalized to **L\* ≈ 65** in CIELAB, ensuring no single hue dominates visually. Keywords use weight (bold) rather than a separate hue, reducing chromatic noise.
 
@@ -62,15 +62,18 @@ Syntax highlighting and semantic UI accents. All normalized to L\* ≈ 65 for pe
 
 ## UI Accent Usage
 
-| Element                               | Color        | Value                      |
-| ------------------------------------- | ------------ | -------------------------- |
-| Active indicator (tabs, activity bar) | cyan         | `#00b3a0`                  |
-| Text selection                        | cyan @ 15%   | `rgba(0, 179, 160, 0.15)`  |
-| Find match highlight                  | orange @ 25% | `rgba(210, 145, 35, 0.25)` |
-| Current line highlight                | cyan @ 5%    | `rgba(0, 179, 160, 0.05)`  |
-| Git: added                            | green        | `#00b573`                  |
-| Git: modified                         | orange       | `#d29123`                  |
-| Git: deleted                          | red          | `#e78175`                  |
-| Errors                                | red          | `#e78175`                  |
-| Warnings                              | orange       | `#d29123`                  |
-| Info                                  | cyan         | `#00b3a0`                  |
+| Element                | Color        | Value       |
+| ---------------------- | ------------ | ----------- |
+| Active tab border      | orange       | `#d29123`   |
+| Text selection         | base00 @ 50% | `#3d6e6280` |
+| Find match highlight   | orange @ 33% | `#d2912355` |
+| Current line highlight | base00 @ 25% | `#3d6e6240` |
+| Button background      | green        | `#00b573`   |
+| Button foreground      | bg-darkest   | `#071512`   |
+| Borders (chrome)       | bg (editor)  | `#103029`   |
+| Links, info messages   | blue         | `#5ea9b6`   |
+| Git: added             | green        | `#00b573`   |
+| Git: modified          | orange       | `#d29123`   |
+| Git: deleted           | red          | `#e78175`   |
+| Errors                 | red          | `#e78175`   |
+| Warnings               | orange       | `#d29123`   |
