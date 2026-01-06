@@ -4,6 +4,36 @@ A dark VSCode theme.
 
 ![Theme screenshot](./images/example.png)
 
+## Installation
+
+### From VS Code Marketplace
+
+1. Open VS Code
+2. Go to Extensions (`Cmd+Shift+X` on macOS, `Ctrl+Shift+X` on Windows/Linux)
+3. Search for "Field Research"
+4. Click Install
+5. Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
+6. Type "Color Theme" and select **Preferences: Color Theme**
+7. Choose **Field Research**
+
+### From Command Line
+
+```bash
+code --install-extension LA1CH3.field-research
+```
+
+### Manual Installation
+
+Download the `.vsix` file from the [releases page](https://github.com/LA1CH3/field-research/releases) and install via:
+
+```bash
+code --install-extension field-research-0.1.0.vsix
+```
+
+---
+
+## About
+
 Inspirations:
 
 - [YouTube videos of remote forest outpost ambience](https://www.youtube.com/watch?v=GGw3axV7IGs&list=RDGGw3axV7IGs&start_radio=1)
