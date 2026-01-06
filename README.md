@@ -2,6 +2,8 @@
 
 A dark VSCode theme.
 
+![Theme screenshot](./images/example.png)
+
 Inspirations:
 
 - [YouTube videos of remote forest outpost ambience](https://www.youtube.com/watch?v=GGw3axV7IGs&list=RDGGw3axV7IGs&start_radio=1)
