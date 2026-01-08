@@ -2,7 +2,7 @@
   "name": "field-research",
   "displayName": "Field Research",
   "description": "A dark theme with high-precision mathematics and analog decay aesthetic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "LA1CH3",
   "engines": {
     "vscode": "^1.5.0"
