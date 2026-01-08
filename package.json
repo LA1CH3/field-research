@@ -37,5 +37,9 @@
   },
   "scripts": {
     "release:patch": "npm version patch && git push --follow-tags"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.2.2",
+    "ovsx": "^0.10.1"
   }
 }

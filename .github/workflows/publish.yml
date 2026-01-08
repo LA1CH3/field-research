@@ -15,12 +15,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
-      - name: Install vsce and ovsx
-        run: npm install -g @vscode/vsce ovsx
+      - name: Install dependencies
+        run: npm ci
 
       - name: Publish to VSCode Marketplace
-        run: vsce publish -p ${{ secrets.VSCE_PAT }}
+        run: npx vsce publish -p ${{ secrets.VSCE_PAT }}
 
       - name: Publish to Open VSX
-        run: ovsx publish -p ${{ secrets.OVSX_PAT }}
+        run: npx ovsx publish -p ${{ secrets.OVSX_PAT }}
