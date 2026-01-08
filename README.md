@@ -4,6 +4,18 @@ A dark VSCode theme.
 
 ![Theme screenshot](./images/example.png)
 
+## About
+
+Inspirations:
+
+- [YouTube videos of remote forest outpost ambience](https://www.youtube.com/watch?v=GGw3axV7IGs&list=RDGGw3axV7IGs&start_radio=1)
+- [Casette Futurism](https://www.reddit.com/r/cassettefuturism/)
+- [Solarized](https://ethanschoonover.com/solarized/)
+
+Built on Solarized's principle of perceptual uniformity: all accent colors are normalized to **L\* ≈ 65** in CIELAB, ensuring no single hue dominates visually. Keywords use weight (bold) rather than a separate hue, reducing chromatic noise.
+
+---
+
 ## Installation
 
 ### From VS Code Marketplace
@@ -29,18 +41,6 @@ Download the `.vsix` file from the [releases page](https://github.com/LA1CH3/fie
 ```bash
 code --install-extension field-research-0.1.0.vsix
 ```
-
----
-
-## About
-
-Inspirations:
-
-- [YouTube videos of remote forest outpost ambience](https://www.youtube.com/watch?v=GGw3axV7IGs&list=RDGGw3axV7IGs&start_radio=1)
-- [Casette futurism](https://www.reddit.com/r/cassettefuturism/)
-- [Solarized](https://ethanschoonover.com/solarized/)
-
-Built on Solarized's principle of perceptual uniformity: all accent colors are normalized to **L\* ≈ 65** in CIELAB, ensuring no single hue dominates visually. Keywords use weight (bold) rather than a separate hue, reducing chromatic noise.
 
 ---
 
