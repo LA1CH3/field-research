@@ -34,5 +34,8 @@
         "path": "./themes/field-research-color-theme.json"
       }
     ]
+  },
+  "scripts": {
+    "release:patch": "npm version patch && git push --follow-tags"
   }
 }
