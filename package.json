@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "publisher": "LA1CH3",
   "engines": {
-    "vscode": "^1.107.0"
+    "vscode": "^1.5.0"
   },
   "categories": [
     "Themes"
