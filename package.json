@@ -2,7 +2,7 @@
   "name": "field-research",
   "displayName": "Field Research",
   "description": "A dark theme inspired by casette futurism and Solarized",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "LA1CH3",
   "engines": {
     "vscode": "^1.5.0"
